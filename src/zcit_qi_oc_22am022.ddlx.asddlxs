@@ -1,0 +1,54 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: {
+    typeName: 'Inspection Item',
+    typeNamePlural: 'Inspection Items',
+    title: { type: #STANDARD, label: 'Item', value: 'Itemno' }
+  }
+}
+annotate entity ZCIT_QI_OC_22AM022 with
+{
+  @UI.facet: [
+    {
+      id: 'QIItemDetails',
+      purpose: #STANDARD,
+      type: #IDENTIFICATION_REFERENCE,
+      label: 'Item Details',
+      position: 10
+    }
+  ]
+ 
+  @UI: { lineItem: [{position:10, label:'Lot Number'}],
+         identification: [{position:10, label:'Lot Number'}] }
+  InspectionLot;
+ 
+  @UI: { lineItem: [{position:20, label:'Item No'}],
+         identification: [{position:20, label:'Item Number'}] }
+  Itemno;
+ 
+  @UI: { lineItem: [{position:30, label:'Characteristic'}],
+         identification: [{position:30, label:'Characteristic'}] }
+  Characteristic;
+ 
+  @UI: { lineItem: [{position:40, label:'Min Value'}],
+         identification: [{position:40, label:'Min Value'}] }
+  Minvalue;
+ 
+  @UI: { lineItem: [{position:50, label:'Max Value'}],
+         identification: [{position:50, label:'Max Value'}] }
+  Maxvalue;
+ 
+  @UI: { lineItem: [{position:60, label:'Actual Value'}],
+         identification: [{position:60, label:'Actual Value'}] }
+  Actualvalue;
+ 
+  @UI: { lineItem: [{position:70, label:'Result'}],
+         identification: [{position:70, label:'Result (P/F)'}] }
+  result;
+ 
+  @UI.hidden: true  Uom;
+  @UI.hidden: true  LocalCreatedBy;
+  @UI.hidden: true  LocalCreatedAt;
+  @UI.hidden: true  LocalLastChangedBy;
+  @UI.hidden: true  LocalLastChangedAt;
+}

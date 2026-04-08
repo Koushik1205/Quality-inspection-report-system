@@ -1,0 +1,77 @@
+unmanaged implementation in class zbp_qi_i_22am022 unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZCIT_QI_I_22AM022 alias QIHeader
+  implementation in class zbp_qi_hdr_22am022 unique
+  draft table zqi_hdrd_22am022
+  lock master total etag LocalLastChangedAt
+  authorization master ( instance )
+  etag master LocalLastChangedAt
+{
+  create ( authorization : global );
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Resume;
+  draft determine action Prepare;
+  draft action Activate optimized;
+  draft action Discard;
+
+  field ( mandatory : create ) InspectionLot;
+  field ( readonly  : update ) InspectionLot;
+  field ( readonly )           LocalLastChangedAt;
+
+  association _qiitem { create; with draft; }
+
+  mapping for zqi_head_22am022
+  {
+    InspectionLot     = inspectionlot;
+    Material          = material;
+    Plant             = plant;
+    InspectionDate    = inspectiondate;
+    InspectionType    = inspectiontype;
+    Status            = status;
+    Inspector         = inspector;
+    Remarks           = remarks;
+    InspectionCost    = inspectioncost;
+    Currency          = currency;
+    LocalCreatedBy    = local_created_by;
+    LocalCreatedAt    = local_created_at;
+    LocalLastChangedBy  = local_last_changed_by;
+    LocalLastChangedAt  = local_last_changed_at;
+  }
+}
+
+define behavior for ZCIT_QI_O_22AM022 alias QIItem
+  implementation in class zbp_qi_itm_22am022 unique
+  draft table zqi_itmd_22am022
+  lock dependent by _qiheader
+  authorization dependent by _qiheader
+  etag master LocalLastChangedAt
+{
+  update;
+  delete;
+
+  field ( mandatory : create, readonly : update ) Itemno;
+  field ( readonly )                              InspectionLot;
+
+  association _qiheader { with draft; }
+
+  mapping for zqi_item_22am022
+  {
+    InspectionLot  = inspectionlot;
+    Itemno         = itemno;
+    Characteristic = characteristic;
+    Minvalue       = minvalue;
+    Maxvalue       = maxvalue;
+    Actualvalue    = actualvalue;
+    Uom            = uom;
+    Results         = results;
+    LocalCreatedBy = local_created_by;
+    LocalCreatedAt = local_created_at;
+    LocalLastChangedBy = local_last_changed_by;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+}

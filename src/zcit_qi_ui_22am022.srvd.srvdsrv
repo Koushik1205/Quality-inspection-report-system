@@ -1,0 +1,5 @@
+@EndUserText.label: 'Quality Inspection Service Definition'
+define service ZCIT_QI_UI_22AM022 {
+  expose ZCIT_QI_C_22AM022;
+  expose ZCIT_QI_OC_22AM022;
+}
